@@ -38,7 +38,10 @@
   },
   "scripts": {
     "cm": "git-cz",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "test": "jest",
+    "build": "rollup -c",
+    "lint": "eslint --ignore-pattern .gitignore"
   },
   "lint-staged": {
     "*.{js,md,json}": ["prettier --write", "git add"]
