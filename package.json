@@ -22,9 +22,11 @@
     "lint-staged": "^6.0.0",
     "lolex": "^2.3.1",
     "prettier": "^1.9.2",
+    "prettier-check": "^2.0.0",
     "react-dom": "^16.2.0",
     "rollup": "^0.53.3",
-    "rollup-plugin-babel": "^4.0.0-beta.0"
+    "rollup-plugin-babel": "^4.0.0-beta.0",
+    "semantic-release": "^11.0.2"
   },
   "dependencies": {
     "prop-types": "^15.6.0",
@@ -41,9 +43,15 @@
     "precommit": "lint-staged",
     "test": "jest",
     "build": "rollup -c",
-    "lint": "eslint --ignore-pattern .gitignore"
+    "lint": "eslint --ignore-pattern .gitignore",
+    "prettier-check":
+      "prettier-check --ignore-path .gitignore '**/*.{js,md,json}'"
   },
   "lint-staged": {
     "*.{js,md,json}": ["prettier --write", "git add"]
+  },
+  "release": {
+    "verifyConditions": "condition-circle",
+    "branch": "release"
   }
 }
