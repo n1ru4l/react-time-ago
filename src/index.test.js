@@ -32,7 +32,7 @@ describe(`getPitString`, () => {
         value,
         next,
       })
-    },
+    }
   )
 })
 
@@ -86,7 +86,7 @@ describe(`createPitObservable`, () => {
 })
 
 describe(`<PointInTimeIndicator />`, () => {
-  const render = ({ value, error } = {}) => createElement(`span`, null, value)
+  const render = ({ value } = {}) => createElement(`span`, null, value)
 
   it(`can be mounted`, () => {
     expect.assertions(1)
@@ -94,7 +94,7 @@ describe(`<PointInTimeIndicator />`, () => {
     const clock = lolex.install()
 
     const element = mount(
-      createElement(PointInTimeIndicator, { date: new Date() }, render),
+      createElement(PointInTimeIndicator, { date: new Date() }, render)
     )
     expect(element.text()).toEqual(`now`)
     clock.uninstall()
@@ -106,7 +106,7 @@ describe(`<PointInTimeIndicator />`, () => {
     const clock = lolex.install()
 
     const element = mount(
-      createElement(PointInTimeIndicator, { date: new Date(), render }),
+      createElement(PointInTimeIndicator, { date: new Date(), render })
     )
     expect(element.text()).toEqual(`now`)
     clock.uninstall()
@@ -118,7 +118,7 @@ describe(`<PointInTimeIndicator />`, () => {
     const clock = lolex.install()
 
     const element = mount(
-      createElement(PointInTimeIndicator, { date: new Date() }, render),
+      createElement(PointInTimeIndicator, { date: new Date() }, render)
     )
     expect(element.text()).toEqual(`now`)
     clock.tick(`02:00`)

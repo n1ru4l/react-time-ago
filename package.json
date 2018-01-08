@@ -1,21 +1,30 @@
 {
-  "name": "react-point-in-time",
+  "name": "@n1ru4l/react-point-in-time",
   "version": "0.1.0",
-  "main": "index.js",
   "author": "Laurin Quast <laurinquast@googlemail.com>",
   "license": "MIT",
+  "module": "./src/index.js",
+  "main": "./lib/bundle.umd.js",
+  "files": ["lib", "src/index.js", "README.md", "LICENSE"],
   "devDependencies": {
-    "@babel/core": "^7.0.0-beta.36",
-    "@babel/preset-env": "^7.0.0-beta.36",
+    "@babel/core": "7.0.0-beta.36",
+    "@babel/preset-env": "7.0.0-beta.36",
     "babel-core": "^7.0.0-0",
     "babel-jest": "^22.0.4",
     "cz-conventional-changelog": "^2.1.0",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
+    "eslint": "^4.15.0",
+    "eslint-plugin-jest": "^21.5.0",
+    "husky": "^0.14.3",
     "jest": "^22.0.4",
     "jest-each": "^0.3.1",
+    "lint-staged": "^6.0.0",
     "lolex": "^2.3.1",
-    "react-dom": "^16.2.0"
+    "prettier": "^1.9.2",
+    "react-dom": "^16.2.0",
+    "rollup": "^0.53.3",
+    "rollup-plugin-babel": "^4.0.0-beta.0"
   },
   "dependencies": {
     "prop-types": "^15.6.0",
@@ -28,6 +37,13 @@
     }
   },
   "scripts": {
-    "cm": "git-cz"
+    "cm": "git-cz",
+    "precommit": "lint-staged",
+    "test": "jest",
+    "build": "rollup -c",
+    "lint": "eslint --ignore-pattern .gitignore"
+  },
+  "lint-staged": {
+    "*.{js,md,json}": ["prettier --write", "git add"]
   }
 }
