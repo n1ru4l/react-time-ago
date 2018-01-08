@@ -48,4 +48,4 @@ workflows:
             - build-job
           filters:
             branches:
-              only: release
+              only: master

@@ -1,7 +1,19 @@
 {
   "name": "@n1ru4l/react-time-ago",
   "version": "0.0.0-semantically-released",
-  "author": "Laurin Quast <laurinquast@googlemail.com>",
+  "author": {
+    "email": "laurinquast@googlemail.com",
+    "name": "Laurin Quast",
+    "url": "https://github.com/n1ru4l"
+  },
+  "keywords": ["react", "date", "ago"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/n1ru4l/react-time-ago.git"
+  },
+  "bugs": {
+    "url": "https://github.com/n1ru4l/react-time-ago"
+  },
   "license": "MIT",
   "module": "./src/index.js",
   "main": "./lib/bundle.umd.js",
@@ -53,6 +65,6 @@
   },
   "release": {
     "verifyConditions": "condition-circle",
-    "branch": "release"
+    "branch": "master"
   }
 }
