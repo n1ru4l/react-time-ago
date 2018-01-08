@@ -19,6 +19,8 @@ yarn add react-point-in-time@https://github.com/n1ru4l/react-point-in-time.git
 ### Default
 
 ```jsx
+import ReactDOM from 'react-dom'
+import React from 'react'
 import { PointInTimeIndicator } from 'react-point-in-time'
 
 ReactDOM.render(
@@ -33,6 +35,8 @@ ReactDOM.render(
 or
 
 ```jsx
+import ReactDOM from 'react-dom'
+import React from 'react'
 import { PointInTimeIndicator } from 'react-point-in-time'
 
 ReactDOM.render(
@@ -46,6 +50,8 @@ ReactDOM.render(
 ### Custom Date Formatter
 
 ```jsx
+import ReactDOM from 'react-dom'
+import React from 'react'
 import { PointInTimeIndicator } from 'react-point-in-time'
 
 const minuteSeconds = 60
