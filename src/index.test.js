@@ -4,11 +4,11 @@ import { createElement } from 'react'
 import Enzyme, { mount } from 'enzyme'
 import EnzymeAdapter from 'enzyme-adapter-react-16'
 
-import { getPitString, createPitObservable, PointInTimeIndicator } from '.'
+import { formatDate, createTimeAgoObservable, TimeAgo } from '.'
 
 Enzyme.configure({ adapter: new EnzymeAdapter() })
 
-describe(`getPitString`, () => {
+describe(`formatDate`, () => {
   const initial = Math.floor(new Date().getTime() / 1000)
 
   each([
@@ -28,7 +28,7 @@ describe(`getPitString`, () => {
   ]).test(
     `returns the correct value for the start date %s and the current date %s which is '%s' and the next update in %s seconds`,
     (date, now, value, next) => {
-      expect(getPitString(initial, now)).toEqual({
+      expect(formatDate(initial, now)).toEqual({
         value,
         next,
       })
@@ -36,14 +36,14 @@ describe(`getPitString`, () => {
   )
 })
 
-describe(`createPitObservable`, () => {
+describe(`createTimeAgoObservable`, () => {
   it(`publishes stuff`, () => {
     expect.assertions(1)
 
     const emittedValues = []
 
     const clock = lolex.install()
-    const observable = createPitObservable(new Date())
+    const observable = createTimeAgoObservable(new Date())
     observable.subscribe(value => {
       emittedValues.push(value)
     })
@@ -58,7 +58,7 @@ describe(`createPitObservable`, () => {
     const emittedValues = []
 
     const clock = lolex.install()
-    const observable = createPitObservable(new Date())
+    const observable = createTimeAgoObservable(new Date())
     observable.subscribe(value => {
       emittedValues.push(value)
     })
@@ -74,7 +74,7 @@ describe(`createPitObservable`, () => {
 
     const clock = lolex.install()
 
-    const observable = createPitObservable(new Date())
+    const observable = createTimeAgoObservable(new Date())
     clock.tick(`05:00`)
 
     observable.subscribe(value => {
@@ -85,7 +85,7 @@ describe(`createPitObservable`, () => {
   })
 })
 
-describe(`<PointInTimeIndicator />`, () => {
+describe(`<TimeAgo />`, () => {
   const render = ({ value } = {}) => createElement(`span`, null, value)
 
   it(`can be mounted`, () => {
@@ -93,9 +93,7 @@ describe(`<PointInTimeIndicator />`, () => {
 
     const clock = lolex.install()
 
-    const element = mount(
-      createElement(PointInTimeIndicator, { date: new Date() }, render)
-    )
+    const element = mount(createElement(TimeAgo, { date: new Date() }, render))
     expect(element.text()).toEqual(`now`)
     clock.uninstall()
   })
@@ -105,9 +103,7 @@ describe(`<PointInTimeIndicator />`, () => {
 
     const clock = lolex.install()
 
-    const element = mount(
-      createElement(PointInTimeIndicator, { date: new Date(), render })
-    )
+    const element = mount(createElement(TimeAgo, { date: new Date(), render }))
     expect(element.text()).toEqual(`now`)
     clock.uninstall()
   })
@@ -117,9 +113,7 @@ describe(`<PointInTimeIndicator />`, () => {
 
     const clock = lolex.install()
 
-    const element = mount(
-      createElement(PointInTimeIndicator, { date: new Date() }, render)
-    )
+    const element = mount(createElement(TimeAgo, { date: new Date() }, render))
     expect(element.text()).toEqual(`now`)
     clock.tick(`02:00`)
     expect(element.text()).toEqual(`2 minutes ago`)

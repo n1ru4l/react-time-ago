@@ -3,7 +3,7 @@ import babel from 'rollup-plugin-babel'
 export default {
   input: `src/index.js`,
   output: {
-    name: `reactPointInTime`,
+    name: `ReactTimeAgo`,
     file: `lib/bundle.umd.js`,
     format: `umd`,
     globals: {

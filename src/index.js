@@ -6,7 +6,7 @@ const minuteSeconds = 60
 const hourSeconds = minuteSeconds * 60
 const daySeconds = hourSeconds * 24
 
-export function getPitString(date, now) {
+export function formatDate(date, now) {
   const d = now - date
 
   if (d < minuteSeconds * 2) {
@@ -35,9 +35,9 @@ export function getPitString(date, now) {
   }
 }
 
-export function createPitObservable(
+export function createTimeAgoObservable(
   date = new Date(),
-  _getPitString = getPitString
+  _formatDate = formatDate
 ) {
   return new Observable(observer => {
     let pendingTimeout = undefined
@@ -45,7 +45,7 @@ export function createPitObservable(
 
     function update() {
       const now = new Date().getTime() / 1000
-      const { value, next } = _getPitString(initial, now)
+      const { value, next } = _formatDate(initial, now)
       observer.next(value)
       pendingTimeout = setTimeout(update, next * 1000)
     }
@@ -59,7 +59,7 @@ export function createPitObservable(
   })
 }
 
-export class PointInTimeIndicator extends Component {
+export class TimeAgo extends Component {
   constructor(...args) {
     super(...args)
     this.state = { error: undefined, value: undefined }
@@ -67,7 +67,7 @@ export class PointInTimeIndicator extends Component {
   }
   componentWillMount() {
     const { props: { date, formatter } } = this
-    this.subscription = createPitObservable(date, formatter).subscribe({
+    this.subscription = createTimeAgoObservable(date, formatter).subscribe({
       next: value => this.setState({ value }),
       error: error => this.setState({ error, value: undefined }),
     })
@@ -83,7 +83,7 @@ export class PointInTimeIndicator extends Component {
   }
 }
 
-PointInTimeIndicator.propTypes = {
+TimeAgo.propTypes = {
   date: PropTypes.instanceOf(Date).isRequired,
   render: PropTypes.func,
   formatter: PropTypes.func,
