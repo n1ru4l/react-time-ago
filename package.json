@@ -1,0 +1,27 @@
+{
+  "name": "pit-observable",
+  "version": "0.1.0",
+  "main": "index.js",
+  "author": "Laurin Quast <laurinquast@googlemail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/preset-env": "^7.0.0-beta.36",
+    "babel-jest": "^22.0.4",
+    "cz-conventional-changelog": "^2.1.0",
+    "jest": "^22.0.4",
+    "jest-each": "^0.3.1"
+  },
+  "dependencies": {
+    "@babel/core": "7.0.0-beta.36",
+    "babel-core": "^7.0.0-0",
+    "zen-observable": "^0.7.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "scripts": {
+    "cm": "git-cz"
+  }
+}
