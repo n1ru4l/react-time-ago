@@ -1,13 +1,17 @@
 # react-point-in-time
 
-A component for updating dates depending on the time.
+A component for updating the format of a date based on the elapsed time.
+The formatter is pluggable and extensible.
+By default it will use `now`, `X minute(s) ago`, `X hour(s) ago` and `X day(s) ago`.
+It uses the renderProp pattern to give you full control over how stuff is rendered.
+Internally it uses [`zen-observable`](https://github.com/zenparsing/zen-observable).
 
 ## Install
 
-It is not published yet so it will fail 😉
+Not published to NPM (yet).
 
 ```bash
-yarn add react-point-in-time
+yarn add react-point-in-time@https://github.com/n1ru4l/react-point-in-time.git
 ```
 
 ## Usage
