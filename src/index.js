@@ -37,7 +37,7 @@ export function getPitString(date, now) {
 
 export function createPitObservable(
   date = new Date(),
-  _getPitString = getPitString,
+  _getPitString = getPitString
 ) {
   return new Observable(observer => {
     let pendingTimeout = undefined
@@ -67,7 +67,7 @@ export class PointInTimeIndicator extends Component {
   }
   componentWillMount() {
     const { props: { date, formatter } } = this
-    const subscription = createPitObservable(date, formatter).subscribe({
+    this.subscription = createPitObservable(date, formatter).subscribe({
       next: value => this.setState({ value }),
       error: error => this.setState({ error, value: undefined }),
     })
