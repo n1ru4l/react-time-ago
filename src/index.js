@@ -32,3 +32,28 @@ export function getPitString(date, now) {
     }
   }
 }
+
+export function createPitObservable(
+  date = new Date(),
+  _getPitString = getPitString,
+) {
+  return new Observable(observer => {
+    let pendingTimeout = undefined
+    const initial = date.getTime() / 1000
+
+    function update() {
+      const now = new Date().getTime() / 1000
+      const { value, next } = _getPitString(initial, now)
+      observer.next(value)
+      pendingTimeout = setTimeout(update, next * 1000)
+    }
+
+    update()
+
+    return () => {
+      console.log(`waaat`)
+      if (pendingTimeout === undefined) return
+      clearTimeout(pendingTimeout)
+    }
+  })
+}

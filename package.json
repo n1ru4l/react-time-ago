@@ -9,7 +9,8 @@
     "babel-jest": "^22.0.4",
     "cz-conventional-changelog": "^2.1.0",
     "jest": "^22.0.4",
-    "jest-each": "^0.3.1"
+    "jest-each": "^0.3.1",
+    "lolex": "^2.3.1"
   },
   "dependencies": {
     "@babel/core": "7.0.0-beta.36",

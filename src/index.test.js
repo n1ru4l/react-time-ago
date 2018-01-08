@@ -1,5 +1,7 @@
 import each from 'jest-each'
-import { getPitString } from '.'
+import lolex from 'lolex'
+
+import { getPitString, createPitObservable } from '.'
 
 describe(`getPitString`, () => {
   const initial = Math.floor(new Date().getTime() / 1000)
@@ -27,4 +29,53 @@ describe(`getPitString`, () => {
       })
     },
   )
+})
+
+describe(`createPitObservable`, () => {
+  it(`publishes stuff`, () => {
+    expect.assertions(1)
+
+    const emittedValues = []
+
+    const clock = lolex.install()
+    const observable = createPitObservable(new Date())
+    observable.subscribe(value => {
+      emittedValues.push(value)
+    })
+
+    expect(emittedValues).toEqual([`now`])
+    clock.uninstall()
+  })
+
+  it(`publishes multiple values over time`, () => {
+    expect.assertions(1)
+
+    const emittedValues = []
+
+    const clock = lolex.install()
+    const observable = createPitObservable(new Date())
+    observable.subscribe(value => {
+      emittedValues.push(value)
+    })
+    clock.tick(`02:00`)
+    expect(emittedValues).toEqual([`now`, `2 minutes ago`])
+    clock.uninstall()
+  })
+
+  it(`does not publish values that are in the past`, () => {
+    expect.assertions(1)
+
+    const emittedValues = []
+
+    const clock = lolex.install()
+
+    const observable = createPitObservable(new Date())
+    clock.tick(`05:00`)
+
+    observable.subscribe(value => {
+      emittedValues.push(value)
+    })
+    expect(emittedValues).toEqual([`5 minutes ago`])
+    clock.uninstall()
+  })
 })
