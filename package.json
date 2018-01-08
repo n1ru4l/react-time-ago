@@ -1,6 +1,6 @@
 {
   "name": "@n1ru4l/react-time-ago",
-  "version": "0.1.0",
+  "version": "0.0.0-semantically-released",
   "author": "Laurin Quast <laurinquast@googlemail.com>",
   "license": "MIT",
   "module": "./src/index.js",
