@@ -1,4 +1,4 @@
-# react-point-in-time
+# @n1ru4l/react-time-ago
 
 A component for updating the format of a date based on the elapsed time.
 The formatter is pluggable and extensible.
@@ -6,12 +6,15 @@ By default it will use `now`, `X minute(s) ago`, `X hour(s) ago` and `X day(s) a
 It uses the renderProp pattern to give you full control over how stuff is rendered.
 Internally it uses [`zen-observable`](https://github.com/zenparsing/zen-observable).
 
+Differences to other available solutions:
+
+* Works on react for the web and react-native.
+* Instead of checking all dates at a given interval it checks and updates single dates only when necessary
+
 ## Install
 
-Not published to NPM (yet).
-
 ```bash
-yarn add react-point-in-time@https://github.com/n1ru4l/react-point-in-time.git
+yarn add @n1ru4l/react-time-ago
 ```
 
 ## Usage
@@ -21,14 +24,14 @@ yarn add react-point-in-time@https://github.com/n1ru4l/react-point-in-time.git
 ```jsx
 import ReactDOM from 'react-dom'
 import React from 'react'
-import { PointInTimeIndicator } from 'react-point-in-time'
+import { TimeAgo } from '@n1ru4l/react-time-ago'
 
 ReactDOM.render(
-  <PointInTimeIndicator
+  <TimeAgo
     date={new Date()}
     render={({ error, value }) => <span>{value}</span>}
   />,
-  document.querySelector(`#main`),
+  document.querySelector(`#main`)
 )
 ```
 
@@ -37,13 +40,11 @@ or
 ```jsx
 import ReactDOM from 'react-dom'
 import React from 'react'
-import { PointInTimeIndicator } from 'react-point-in-time'
+import { TimeAgo } from '@n1ru4l/react-time-ago'
 
 ReactDOM.render(
-  <PointInTimeIndicator date={new Date()}>
-    {({ error, value }) => <span>{value}</span>}
-  </PointInTimeIndicator>,
-  document.querySelector(`#main`),
+  <TimeAgo>{({ error, value }) => <span>{value}</span>}</TimeAgo>,
+  document.querySelector(`#main`)
 )
 ```
 
@@ -52,7 +53,7 @@ ReactDOM.render(
 ```jsx
 import ReactDOM from 'react-dom'
 import React from 'react'
-import { PointInTimeIndicator } from 'react-point-in-time'
+import { TimeAgo } from '@n1ru4l/react-time-ago'
 
 const minuteSeconds = 60
 const hourSeconds = minuteSeconds * 60
@@ -63,8 +64,8 @@ function formatter(date, now) {
 
   if (d < minuteSeconds * 2) {
     return {
-      value: `now`,
-      next: minuteSeconds * 2 - d,
+      value: `now`, // this is the value should be displayed
+      next: minuteSeconds * 2 - d, // this number is used to schedule the next update of a value
     }
   } else if (d < hourSeconds) {
     const minutes = Math.floor(d / minuteSeconds)
@@ -88,10 +89,10 @@ function formatter(date, now) {
 }
 
 ReactDOM.render(
-  <PointInTimeIndicator date={new Date()} formatter={formatter}>
+  <TimeAgo date={new Date()} formatter={formatter}>
     {({ error, value }) => <span>{value}</span>}
-  </PointInTimeIndicator>,
-  document.querySelector(`#main`),
+  </TimeAgo>,
+  document.querySelector(`#main`)
 )
 ```
 
