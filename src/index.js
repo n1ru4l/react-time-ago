@@ -1,5 +1,5 @@
 import Observable from 'zen-observable'
-import React, { Component } from 'react'
+import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 const minuteSeconds = 60
@@ -60,12 +60,6 @@ export function createPitObservable(
 }
 
 export class PointInTimeIndicator extends Component {
-  static propTypes = {
-    date: PropTypes.instanceOf(Date).isRequired,
-    render: PropTypes.func,
-    formatter: PropTypes.func,
-  }
-
   constructor(...args) {
     super(...args)
     this.state = { error: undefined, value: undefined }
@@ -87,4 +81,10 @@ export class PointInTimeIndicator extends Component {
     const { state: { error, value }, props: { render, children } } = this
     return (children || render)({ error, value })
   }
+}
+
+PointInTimeIndicator.propTypes = {
+  date: PropTypes.instanceOf(Date).isRequired,
+  render: PropTypes.func,
+  formatter: PropTypes.func,
 }
