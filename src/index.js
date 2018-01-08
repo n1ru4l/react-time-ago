@@ -1,4 +1,5 @@
 import Observable from 'zen-observable'
+import React, { Component } from 'react'
 
 const minuteSeconds = 60
 const hourSeconds = minuteSeconds * 60
@@ -56,4 +57,28 @@ export function createPitObservable(
       clearTimeout(pendingTimeout)
     }
   })
+}
+
+export class PointInTimeIndicator extends Component {
+  constructor(...args) {
+    super(...args)
+    this.state = { error: undefined, value: undefined }
+    this.subscription = undefined
+  }
+  componentWillMount() {
+    const { props: { date, formatter } } = this
+    const subscription = createPitObservable(date, formatter).subscribe({
+      next: value => this.setState({ value }),
+      error: error => this.setState({ error, value: undefined }),
+    })
+  }
+  componentWillUnmount() {
+    if (!this.subscription) return
+    this.subscription.unsubscribe()
+  }
+
+  render() {
+    const { state: { error, value }, props: { render, children } } = this
+    return (children || render)({ error, value })
+  }
 }

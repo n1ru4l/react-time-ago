@@ -1,7 +1,12 @@
 import each from 'jest-each'
 import lolex from 'lolex'
+import { createElement } from 'react'
+import Enzyme, { mount } from 'enzyme'
+import EnzymeAdapter from 'enzyme-adapter-react-16'
 
-import { getPitString, createPitObservable } from '.'
+import { getPitString, createPitObservable, PointInTimeIndicator } from '.'
+
+Enzyme.configure({ adapter: new EnzymeAdapter() })
 
 describe(`getPitString`, () => {
   const initial = Math.floor(new Date().getTime() / 1000)
@@ -76,6 +81,50 @@ describe(`createPitObservable`, () => {
       emittedValues.push(value)
     })
     expect(emittedValues).toEqual([`5 minutes ago`])
+    clock.uninstall()
+  })
+})
+
+describe(`<PointInTimeIndicator />`, () => {
+  const render = ({ value, error } = {}) => createElement(`span`, null, value)
+
+  it(`can be mounted`, () => {
+    expect.assertions(1)
+
+    const clock = lolex.install()
+
+    const element = mount(
+      createElement(PointInTimeIndicator, { date: new Date() }, render),
+    )
+    expect(element.text()).toEqual(`now`)
+    clock.uninstall()
+  })
+
+  it(`also supports a render prop`, () => {
+    expect.assertions(1)
+
+    const clock = lolex.install()
+
+    const element = mount(
+      createElement(PointInTimeIndicator, { date: new Date(), render }),
+    )
+    expect(element.text()).toEqual(`now`)
+    clock.uninstall()
+  })
+
+  it(`can update the date over time`, () => {
+    expect.assertions(3)
+
+    const clock = lolex.install()
+
+    const element = mount(
+      createElement(PointInTimeIndicator, { date: new Date() }, render),
+    )
+    expect(element.text()).toEqual(`now`)
+    clock.tick(`02:00`)
+    expect(element.text()).toEqual(`2 minutes ago`)
+    clock.tick(`01:00:00`)
+    expect(element.text()).toEqual(`1 hour ago`)
     clock.uninstall()
   })
 })
