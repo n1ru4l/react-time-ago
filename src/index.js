@@ -1,5 +1,6 @@
 import Observable from 'zen-observable'
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 const minuteSeconds = 60
 const hourSeconds = minuteSeconds * 60
@@ -52,7 +53,6 @@ export function createPitObservable(
     update()
 
     return () => {
-      console.log(`waaat`)
       if (pendingTimeout === undefined) return
       clearTimeout(pendingTimeout)
     }
@@ -60,6 +60,12 @@ export function createPitObservable(
 }
 
 export class PointInTimeIndicator extends Component {
+  static propTypes = {
+    date: PropTypes.instanceOf(Date).isRequired,
+    render: PropTypes.func,
+    formatter: PropTypes.func,
+  }
+
   constructor(...args) {
     super(...args)
     this.state = { error: undefined, value: undefined }
