@@ -6,6 +6,8 @@ By default it will use `now`, `X minute(s) ago`, `X hour(s) ago` and `X day(s) a
 It uses the renderProp pattern to give you full control over how stuff is rendered.
 Internally it uses [`zen-observable`](https://github.com/zenparsing/zen-observable).
 
+Demo: https://codesandbox.io/s/34423v2v26
+
 Differences to other available solutions:
 
 * Works on react for the web and react-native.
@@ -99,3 +101,23 @@ ReactDOM.render(
 ## API Docs
 
 TODO
+
+## Contributing
+
+This repository follows [semantic versioning](https://semver.org/). A short introduction can be found [here](https://medium.com/just-meteor/understanding-semver-3f75d11b4d).
+
+This repository also uses [semantic-release](https://github.com/semantic-release/semantic-release) for managing the releases.
+
+Please fork this repository and checkout your clone. [Here](https://guides.github.com/activities/forking/) is a short guide for doing so.
+
+Pull requests should be made to the [`next`](https://github.com/n1ru4l/react-time-ago/tree/next) branch. Therefore if you develop you should always branch off `next`.
+
+Check yout the `next` branch (`git checkout next`) and then create your own branch (`git checkout -b <your-fancy-feature>`).
+
+Install the dependencies using `yarn`.
+
+Please to use `yarn cm` for committing changes.
+
+Create your [Pull Request](https://guides.github.com/activities/forking/#making-a-pull-request) as soon as possible. So you can obtain feedback early and prevent multiple people working on the same thing.
+
+Make sure all changes you make are covered by tests. You can run those with `yarn test`. Also you can run the interactive watch mode (`yarn test --watch`). This repository is using [`jest`](https://facebook.github.io/jest/docs/en/getting-started.html) for testing.
