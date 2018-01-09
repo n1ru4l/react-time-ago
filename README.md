@@ -6,6 +6,8 @@ By default it will use `now`, `X minute(s) ago`, `X hour(s) ago` and `X day(s) a
 It uses the renderProp pattern to give you full control over how stuff is rendered.
 Internally it uses [`zen-observable`](https://github.com/zenparsing/zen-observable).
 
+Demo: https://codesandbox.io/s/34423v2v26
+
 Differences to other available solutions:
 
 * Works on react for the web and react-native.
