@@ -1,5 +1,14 @@
 {
-  "extends": [
-    "config:base"
-  ]
+  "extends": ["config:base"],
+  "depTypes": [
+    {
+      "depType": "dependencies",
+      "pinVersions": false
+    }
+  ],
+  "rebaseStalePrs": true,
+  "automerge": "minor",
+  "labels": ["tooling", "dependencies"],
+  "assignees": ["@n1ru4l"],
+  "reviewers": ["@n1ru4l"]
 }
