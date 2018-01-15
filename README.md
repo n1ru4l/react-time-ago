@@ -1,5 +1,11 @@
 # @n1ru4l/react-time-ago
 
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![npm version](https://badge.fury.io/js/%40n1ru4l%2Freact-time-ago.svg)](https://badge.fury.io/js/%40n1ru4l%2Freact-time-ago)
+[![CircleCI](https://circleci.com/gh/n1ru4l/react-time-ago.svg?style=svg)](https://circleci.com/gh/n1ru4l/react-time-ago?style=shield)
+[![dependency status](https://david-dm.org/n1ru4l/react-time-ago/status.svg)](https://david-dm.org/n1ru4l/react-time-ago)
+[![dev dependency status](https://david-dm.org/bevry/badges/dev-status.svg)](https://david-dm.org/n1ru4l/react-time-ago?type=dev)
+
 A component for updating the format of a date based on the elapsed time.
 The formatter is pluggable and extensible.
 By default it will use `now`, `X minute(s) ago`, `X hour(s) ago` and `X day(s) ago`.
@@ -110,9 +116,7 @@ This repository also uses [semantic-release](https://github.com/semantic-release
 
 Please fork this repository and checkout your clone. [Here](https://guides.github.com/activities/forking/) is a short guide for doing so.
 
-Pull requests should be made to the [`next`](https://github.com/n1ru4l/react-time-ago/tree/next) branch. Therefore if you develop you should always branch off `next`.
-
-Check yout the `next` branch (`git checkout next`) and then create your own branch (`git checkout -b <your-fancy-feature>`).
+Pull requests should be made to the [`master`](https://github.com/n1ru4l/react-time-ago/tree/master) branch. Therefore if you develop you should always branch off `master`.
 
 Install the dependencies using `yarn`.
 
