@@ -4,6 +4,10 @@
     {
       "depType": "dependencies",
       "pinVersions": false
+    },
+    {
+      "depTypes": "peerDependencies",
+      "pinVersions": false
     }
   ],
   "rebaseStalePrs": true,
