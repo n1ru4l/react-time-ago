@@ -32,7 +32,7 @@
     "husky": "0.14.3",
     "jest": "22.1.4",
     "jest-each": "0.3.1",
-    "lint-staged": "6.0.1",
+    "lint-staged": "6.1.0",
     "lolex": "2.3.1",
     "prettier": "1.10.2",
     "prettier-check": "2.0.0",
