@@ -103,6 +103,13 @@
   dependencies:
     "@babel/types" "7.0.0-beta.38"
 
+"@babel/helper-module-imports@7.0.0-beta.35":
+  version "7.0.0-beta.35"
+  resolved "https://registry.yarnpkg.com/@babel/helper-module-imports/-/helper-module-imports-7.0.0-beta.35.tgz#308e350e731752cdb4d0f058df1d704925c64e0a"
+  dependencies:
+    "@babel/types" "7.0.0-beta.35"
+    lodash "^4.2.0"
+
 "@babel/helper-module-imports@7.0.0-beta.38":
   version "7.0.0-beta.38"
   resolved "https://registry.yarnpkg.com/@babel/helper-module-imports/-/helper-module-imports-7.0.0-beta.38.tgz#1b3a6dd9105cc0c7fc0d67d44a08706eb4a506a1"
@@ -433,6 +440,14 @@
     globals "^11.1.0"
     invariant "^2.2.0"
     lodash "^4.2.0"
+
+"@babel/types@7.0.0-beta.35":
+  version "7.0.0-beta.35"
+  resolved "https://registry.yarnpkg.com/@babel/types/-/types-7.0.0-beta.35.tgz#cf933a9a9a38484ca724b335b88d83726d5ab960"
+  dependencies:
+    esutils "^2.0.2"
+    lodash "^4.2.0"
+    to-fast-properties "^2.0.0"
 
 "@babel/types@7.0.0-beta.38":
   version "7.0.0-beta.38"
@@ -4943,10 +4958,11 @@ rimraf@2, rimraf@^2.2.8, rimraf@^2.5.1, rimraf@^2.5.4, rimraf@^2.6.1:
   dependencies:
     glob "^7.0.5"
 
-rollup-plugin-babel@4.0.0-beta.0:
-  version "4.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/rollup-plugin-babel/-/rollup-plugin-babel-4.0.0-beta.0.tgz#2fccbc30bf620bfac0cf870324248e30ba824ded"
+rollup-plugin-babel@4.0.0-beta.1:
+  version "4.0.0-beta.1"
+  resolved "https://registry.yarnpkg.com/rollup-plugin-babel/-/rollup-plugin-babel-4.0.0-beta.1.tgz#c4a54d91d77d4aaf72be2f6b3a66ea1b1f7b3e52"
   dependencies:
+    "@babel/helper-module-imports" "7.0.0-beta.35"
     rollup-pluginutils "^1.5.0"
 
 rollup-pluginutils@^1.5.0:
