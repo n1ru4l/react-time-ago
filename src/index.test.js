@@ -37,40 +37,40 @@ describe(`formatDate`, () => {
 })
 
 describe(`createTimeAgoObservable`, () => {
-  it(`publishes stuff`, () => {
+  it(`publishes stuff`, done => {
     expect.assertions(1)
-
-    const emittedValues = []
 
     const clock = lolex.install()
     const observable = createTimeAgoObservable(new Date())
     observable.subscribe(value => {
-      emittedValues.push(value)
+      expect(value).toEqual(`now`)
+      done()
     })
-
-    expect(emittedValues).toEqual([`now`])
     clock.uninstall()
   })
 
-  it(`publishes multiple values over time`, () => {
+  it(`publishes multiple values over time`, done => {
     expect.assertions(1)
 
     const emittedValues = []
+    let itemCounter = 0
 
     const clock = lolex.install()
     const observable = createTimeAgoObservable(new Date())
     observable.subscribe(value => {
+      itemCounter++
       emittedValues.push(value)
+      if (itemCounter > 1) {
+        expect(emittedValues).toEqual([`now`, `2 minutes ago`])
+        done()
+      }
     })
     clock.tick(`02:00`)
-    expect(emittedValues).toEqual([`now`, `2 minutes ago`])
     clock.uninstall()
   })
 
-  it(`does not publish values that are in the past`, () => {
+  it(`does not publish values that are in the past`, done => {
     expect.assertions(1)
-
-    const emittedValues = []
 
     const clock = lolex.install()
 
@@ -78,9 +78,9 @@ describe(`createTimeAgoObservable`, () => {
     clock.tick(`05:00`)
 
     observable.subscribe(value => {
-      emittedValues.push(value)
+      expect(value).toEqual(`5 minutes ago`)
+      done()
     })
-    expect(emittedValues).toEqual([`5 minutes ago`])
     clock.uninstall()
   })
 })
@@ -88,37 +88,47 @@ describe(`createTimeAgoObservable`, () => {
 describe(`<TimeAgo />`, () => {
   const render = ({ value } = {}) => createElement(`span`, null, value)
 
-  it(`can be mounted`, () => {
+  it(`can be mounted`, done => {
     expect.assertions(1)
-
-    const clock = lolex.install()
 
     const element = mount(createElement(TimeAgo, { date: new Date() }, render))
-    expect(element.text()).toEqual(`now`)
-    clock.uninstall()
+
+    Promise.resolve().then(() => {
+      expect(element.text()).toEqual(`now`)
+      done()
+    })
   })
 
-  it(`also supports a render prop`, () => {
+  it(`also supports a render prop`, done => {
     expect.assertions(1)
-
-    const clock = lolex.install()
 
     const element = mount(createElement(TimeAgo, { date: new Date(), render }))
-    expect(element.text()).toEqual(`now`)
-    clock.uninstall()
+
+    Promise.resolve().then(() => {
+      expect(element.text()).toEqual(`now`)
+      done()
+    })
   })
 
-  it(`can update the date over time`, () => {
+  it(`can update the date over time`, done => {
     expect.assertions(3)
-
-    const clock = lolex.install()
+    let clock = lolex.install()
 
     const element = mount(createElement(TimeAgo, { date: new Date() }, render))
-    expect(element.text()).toEqual(`now`)
-    clock.tick(`02:00`)
-    expect(element.text()).toEqual(`2 minutes ago`)
-    clock.tick(`01:00:00`)
-    expect(element.text()).toEqual(`1 hour ago`)
-    clock.uninstall()
+
+    Promise.resolve()
+      .then(() => {
+        expect(element.text()).toEqual(`now`)
+        clock.tick(`02:00`)
+      })
+      .then(() => {
+        expect(element.text()).toEqual(`2 minutes ago`)
+        clock.tick(`01:00:00`)
+      })
+      .then(() => {
+        expect(element.text()).toEqual(`1 hour ago`)
+        clock.uninstall()
+        done()
+      })
   })
 })

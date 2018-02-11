@@ -44,7 +44,7 @@
   },
   "dependencies": {
     "prop-types": "^15.6.0",
-    "zen-observable": "^0.8.0"
+    "zen-observable": "^0.8.6"
   },
   "config": {
     "commitizen": {
