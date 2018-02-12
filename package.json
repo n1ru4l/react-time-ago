@@ -19,8 +19,8 @@
   "main": "./lib/bundle.umd.js",
   "files": ["lib", "src/index.js", "README.md", "LICENSE"],
   "devDependencies": {
-    "@babel/core": "7.0.0-beta.39",
-    "@babel/preset-env": "7.0.0-beta.39",
+    "@babel/core": "7.0.0-beta.40",
+    "@babel/preset-env": "7.0.0-beta.40",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "22.2.2",
     "condition-circle": "2.0.1",
