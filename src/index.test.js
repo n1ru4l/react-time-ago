@@ -95,6 +95,7 @@ describe(`<TimeAgo />`, () => {
 
     Promise.resolve().then(() => {
       expect(element.text()).toEqual(`now`)
+      element.unmount()
       done()
     })
   })
@@ -106,6 +107,7 @@ describe(`<TimeAgo />`, () => {
 
     Promise.resolve().then(() => {
       expect(element.text()).toEqual(`now`)
+      element.unmount()
       done()
     })
   })
@@ -127,8 +129,31 @@ describe(`<TimeAgo />`, () => {
       })
       .then(() => {
         expect(element.text()).toEqual(`1 hour ago`)
+        element.unmount()
         clock.uninstall()
         done()
       })
+  })
+
+  it(`renders the correct date on the first render`, () => {
+    expect.assertions(1)
+    const element = mount(createElement(TimeAgo, { date: new Date() }, render))
+    expect(element.text()).toEqual(`now`)
+    element.unmount()
+  })
+
+  it(`does not rerender after the first render, if the value has not changed`, done => {
+    expect.assertions(1)
+    let counter = 0
+    const render = () => {
+      counter++
+      return null
+    }
+    const element = mount(createElement(TimeAgo, { date: new Date() }, render))
+    Promise.resolve().then(() => {
+      expect(counter).toEqual(1)
+      element.unmount()
+      done()
+    })
   })
 })
