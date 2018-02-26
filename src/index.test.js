@@ -95,6 +95,7 @@ describe(`<TimeAgo />`, () => {
 
     Promise.resolve().then(() => {
       expect(element.text()).toEqual(`now`)
+      element.unmount()
       done()
     })
   })
@@ -106,6 +107,7 @@ describe(`<TimeAgo />`, () => {
 
     Promise.resolve().then(() => {
       expect(element.text()).toEqual(`now`)
+      element.unmount()
       done()
     })
   })
@@ -127,6 +129,7 @@ describe(`<TimeAgo />`, () => {
       })
       .then(() => {
         expect(element.text()).toEqual(`1 hour ago`)
+        element.unmount()
         clock.uninstall()
         done()
       })
