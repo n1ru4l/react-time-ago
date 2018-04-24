@@ -62,7 +62,9 @@ export function createTimeAgoObservable(
 export class TimeAgo extends Component {
   constructor(...args) {
     super(...args)
-    const { props: { formatter, date } } = this
+    const {
+      props: { formatter, date },
+    } = this
     const { value } = formatter(
       date.getTime() / 1000,
       new Date().getTime() / 1000
@@ -74,7 +76,9 @@ export class TimeAgo extends Component {
     this.subscription = undefined
   }
   componentWillMount() {
-    const { props: { date, formatter } } = this
+    const {
+      props: { date, formatter },
+    } = this
     this.subscription = createTimeAgoObservable(date, formatter).subscribe({
       next: value => {
         if (value === this.state.value) return
@@ -89,7 +93,10 @@ export class TimeAgo extends Component {
   }
 
   render() {
-    const { state: { error, value }, props: { render, children } } = this
+    const {
+      state: { error, value },
+      props: { render, children },
+    } = this
     return (children || render)({ error, value })
   }
 }
