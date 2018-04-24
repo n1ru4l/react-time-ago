@@ -23,6 +23,7 @@
     "@babel/preset-env": "7.0.0-beta.46",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "22.4.3",
+    "commitizen": "2.9.6",
     "condition-circle": "2.0.1",
     "cz-conventional-changelog": "2.1.0",
     "enzyme": "3.3.0",
@@ -56,9 +57,11 @@
     "precommit": "lint-staged",
     "test": "jest",
     "build": "rollup -c",
-    "lint": "eslint --ignore-pattern .gitignore",
+    "lint": "eslint --ignore-pattern .gitignore **/*.js",
     "prettier-check":
-      "prettier-check --ignore-path .gitignore '**/*.{js,md,json}'"
+      "prettier-check --ignore-path .gitignore '**/*.{js,md,json}'",
+    "prettier-fix":
+      "prettier --ignore-path .gitignore --write '**/*.{js,md,json}'"
   },
   "lint-staged": {
     "*.{js,md,json}": ["prettier --write", "git add"]
