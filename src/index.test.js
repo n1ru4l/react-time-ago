@@ -14,17 +14,17 @@ describe(`formatDate`, () => {
   each([
     [initial, initial, `now`, 120],
     [initial, initial + 119, `now`, 1],
-    [initial, initial + 120, `2 minutes ago`, 60],
-    [initial, initial + 121, `2 minutes ago`, 59],
-    [initial, initial + 60 * 59, `59 minutes ago`, 60],
-    [initial, initial + 60 * 59 + 59, `59 minutes ago`, 1],
-    [initial, initial + 60 * 60, `1 hour ago`, 3600],
-    [initial, initial + 60 * 60 * 2 - 1, `1 hour ago`, 1],
-    [initial, initial + 60 * 120, `2 hours ago`, 3600],
-    [initial, initial + 60 * 60 * 24 - 1, `23 hours ago`, 1],
-    [initial, initial + 60 * 60 * 24, `1 day ago`, 60 * 60 * 24],
-    [initial, initial + 60 * 60 * 24 * 2, `2 days ago`, 60 * 60 * 24],
-    [initial, initial + 60 * 60 * 24 * 2 + 3, `2 days ago`, 60 * 60 * 24 - 3],
+    [initial, initial + 120, `2m ago`, 60],
+    [initial, initial + 121, `2m ago`, 59],
+    [initial, initial + 60 * 59, `59m ago`, 60],
+    [initial, initial + 60 * 59 + 59, `59m ago`, 1],
+    [initial, initial + 60 * 60, `1h ago`, 3600],
+    [initial, initial + 60 * 60 * 2 - 1, `1h ago`, 1],
+    [initial, initial + 60 * 120, `2h ago`, 3600],
+    [initial, initial + 60 * 60 * 24 - 1, `23h ago`, 1],
+    [initial, initial + 60 * 60 * 24, `1d ago`, 60 * 60 * 24],
+    [initial, initial + 60 * 60 * 24 * 2, `2d ago`, 60 * 60 * 24],
+    [initial, initial + 60 * 60 * 24 * 2 + 3, `2d ago`, 60 * 60 * 24 - 3],
   ]).test(
     `returns the correct value for the start date %s and the current date %s which is '%s' and the next update in %s seconds`,
     (date, now, value, next) => {
@@ -61,7 +61,7 @@ describe(`createTimeAgoObservable`, () => {
       itemCounter++
       emittedValues.push(value)
       if (itemCounter > 1) {
-        expect(emittedValues).toEqual([`now`, `2 minutes ago`])
+        expect(emittedValues).toEqual([`now`, `2m ago`])
         done()
       }
     })
@@ -78,7 +78,7 @@ describe(`createTimeAgoObservable`, () => {
     clock.tick(`05:00`)
 
     observable.subscribe(value => {
-      expect(value).toEqual(`5 minutes ago`)
+      expect(value).toEqual(`5m ago`)
       done()
     })
     clock.uninstall()
@@ -124,11 +124,11 @@ describe(`<TimeAgo />`, () => {
         clock.tick(`02:00`)
       })
       .then(() => {
-        expect(element.text()).toEqual(`2 minutes ago`)
+        expect(element.text()).toEqual(`2m ago`)
         clock.tick(`01:00:00`)
       })
       .then(() => {
-        expect(element.text()).toEqual(`1 hour ago`)
+        expect(element.text()).toEqual(`1h ago`)
         element.unmount()
         clock.uninstall()
         done()
