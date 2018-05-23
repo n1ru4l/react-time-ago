@@ -81,15 +81,44 @@ export class TimeAgo extends Component {
     } = this
     this.subscription = createTimeAgoObservable(date, formatter).subscribe({
       next: value => {
-        if (value === this.state.value) return
+        if (value === this.state.value) {
+          return
+        }
         this.setState({ value })
       },
       error: error => this.setState({ error, value: undefined }),
     })
   }
+
   componentWillUnmount() {
-    if (!this.subscription) return
+    if (!this.subscription) {
+      return
+    }
     this.subscription.unsubscribe()
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.date.getTime() !== nextProps.date.getTime()) {
+      this.subscription.unsubscribe()
+      const { value } = this.props.formatter(
+        nextProps.date.getTime() / 1000,
+        new Date().getTime() / 1000
+      )
+      this.setState({ value })
+
+      this.subscription = createTimeAgoObservable(
+        nextProps.date,
+        this.props.formatter
+      ).subscribe({
+        next: value => {
+          if (value === this.state.value) {
+            return
+          }
+          this.setState({ value })
+        },
+        error: error => this.setState({ error, value: undefined }),
+      })
+    }
   }
 
   render() {

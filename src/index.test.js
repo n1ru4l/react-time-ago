@@ -1,6 +1,6 @@
 import each from 'jest-each'
 import lolex from 'lolex'
-import { createElement } from 'react'
+import { createElement, Component } from 'react'
 import Enzyme, { mount } from 'enzyme'
 import EnzymeAdapter from 'enzyme-adapter-react-16'
 
@@ -155,5 +155,51 @@ describe(`<TimeAgo />`, () => {
       element.unmount()
       done()
     })
+  })
+
+  it(`does rerender after the date value changed with a new value`, done => {
+    expect.assertions(2)
+    const clock = lolex.install()
+
+    const values = []
+    const render = value => {
+      values.push(value.value)
+      return null
+    }
+
+    let setDate = () => undefined
+
+    class TestComponent extends Component {
+      constructor(props) {
+        super(props)
+        this.state = { date: new Date() }
+
+        setDate = date => {
+          this.setState({ date })
+        }
+      }
+      render() {
+        return createElement(TimeAgo, { date: this.state.date, render })
+      }
+    }
+
+    const element = mount(createElement(TestComponent))
+
+    Promise.resolve()
+      .then(() => {
+        expect(values).toEqual([`now`])
+        setDate(new Date(Date.now() - 5 * 60000))
+      })
+      .then(() => {
+        expect(values).toEqual([`now`, `5m ago`])
+      })
+      .catch(err => {
+        done.fail(err)
+      })
+      .then(() => {
+        element.unmount()
+        clock.uninstall()
+        done()
+      })
   })
 })
