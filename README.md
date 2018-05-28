@@ -16,8 +16,8 @@ Demo: https://codesandbox.io/s/34423v2v26
 
 Differences to other available solutions:
 
-* Works on react for the web and react-native.
-* Instead of checking all dates at a given interval it checks and updates single dates only when necessary
+- Works on react for the web and react-native.
+- Instead of checking all dates at a given interval it checks and updates single dates only when necessary
 
 ## Install
 
@@ -79,19 +79,19 @@ function formatter(date, now) {
     const minutes = Math.floor(d / minuteSeconds)
     return {
       value: `${minutes} minutes ago`,
-      next: minuteSeconds - d % 60,
+      next: minuteSeconds - (d % 60),
     }
   } else if (d < daySeconds) {
     const hours = Math.floor(d / hourSeconds)
     return {
       value: `${hours} hour${hours > 1 ? `s` : ``} ago`,
-      next: hourSeconds - d % hourSeconds,
+      next: hourSeconds - (d % hourSeconds),
     }
   } else {
     const days = Math.floor(d / daySeconds)
     return {
       value: `${days} day${days > 1 ? `s` : ``} ago`,
-      next: daySeconds - d % daySeconds,
+      next: daySeconds - (d % daySeconds),
     }
   }
 }
