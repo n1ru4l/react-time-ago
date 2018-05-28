@@ -18,19 +18,19 @@ export function formatDate(date, now) {
     const minutes = Math.floor(d / minuteSeconds)
     return {
       value: `${minutes}m ago`,
-      next: minuteSeconds - d % 60,
+      next: minuteSeconds - (d % 60),
     }
   } else if (d < daySeconds) {
     const hours = Math.floor(d / hourSeconds)
     return {
       value: `${hours}h ago`,
-      next: hourSeconds - d % hourSeconds,
+      next: hourSeconds - (d % hourSeconds),
     }
   } else {
     const days = Math.floor(d / daySeconds)
     return {
       value: `${days}d ago`,
-      next: daySeconds - d % daySeconds,
+      next: daySeconds - (d % daySeconds),
     }
   }
 }
