@@ -1,6 +1,7 @@
 # @n1ru4l/react-time-ago
 
-[![npm version](https://badge.fury.io/js/%40n1ru4l%2Freact-time-ago.svg)](https://badge.fury.io/js/%40n1ru4l%2Freact-time-ago)
+[![npm version](https://badge.fury.io/js/%40n1ru4l%2Freact-time-ago.svg)](https://www.npmjs.com/package/@n1ru4l/react-time-ago)
+[![npm downloads](https://img.shields.io/npm/dm/@n1ru4l/react-time-ago.svg)](https://www.npmjs.com/package/@n1ru4l/react-time-ago)
 [![CircleCI](https://circleci.com/gh/n1ru4l/react-time-ago.svg?style=shield)](https://circleci.com/gh/n1ru4l/react-time-ago)
 [![dependency status](https://david-dm.org/n1ru4l/react-time-ago/status.svg)](https://david-dm.org/n1ru4l/react-time-ago)
 [![dev dependency status](https://david-dm.org/bevry/badges/dev-status.svg)](https://david-dm.org/n1ru4l/react-time-ago?type=dev)
