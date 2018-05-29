@@ -1,5 +1,5 @@
 {
-  "extends": ["config:base"],
+  "extends": ["config:base", "default:automergeDigest"],
   "depTypes": [
     {
       "depType": "dependencies",
