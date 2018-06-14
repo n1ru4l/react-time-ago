@@ -1,12 +1,17 @@
-import Observable from 'zen-observable'
-import { Component } from 'react'
-import PropTypes from 'prop-types'
+//@flow
+import Observable, { type Subscription } from 'zen-observable'
+import { Component, type Node } from 'react'
 
 const minuteSeconds = 60
 const hourSeconds = minuteSeconds * 60
 const daySeconds = hourSeconds * 24
 
-export function formatDate(date, now) {
+export type FormatDateFunction = (
+  date: number,
+  now: number
+) => { value: string, next: number }
+
+export function formatDate(date: number, now: number) {
   const d = now - date
 
   if (d < minuteSeconds * 2) {
@@ -36,9 +41,9 @@ export function formatDate(date, now) {
 }
 
 export function createTimeAgoObservable(
-  date = new Date(),
-  _formatDate = formatDate
-) {
+  date?: Date = new Date(),
+  _formatDate?: FormatDateFunction = formatDate
+): Observable<string> {
   return new Observable(observer => {
     let pendingTimeout = undefined
     const initial = date.getTime() / 1000
@@ -59,11 +64,33 @@ export function createTimeAgoObservable(
   })
 }
 
-export class TimeAgo extends Component {
-  constructor(...args) {
-    super(...args)
+export type TimeAgoRenderFunction = ({ value?: string, error?: string }) => Node
+
+export type TimeAgoPropTypes =
+  | {
+      date: Date,
+      formatter?: FormatDateFunction,
+      render: TimeAgoRenderFunction,
+      children: void,
+    }
+  | {
+      date: Date,
+      formatter?: FormatDateFunction,
+      render: void,
+      children: TimeAgoRenderFunction,
+    }
+
+export type TimeAgoStateTypes = {
+  error?: string,
+  value?: string,
+}
+
+export class TimeAgo extends Component<TimeAgoPropTypes, TimeAgoStateTypes> {
+  subscription: Subscription<string>
+  constructor(props: TimeAgoPropTypes) {
+    super((props: TimeAgoPropTypes))
     const {
-      props: { formatter, date },
+      props: { formatter = formatDate, date },
     } = this
     const { value } = formatter(
       date.getTime() / 1000,
@@ -73,12 +100,6 @@ export class TimeAgo extends Component {
       error: undefined,
       value,
     }
-    this.subscription = undefined
-  }
-  componentWillMount() {
-    const {
-      props: { date, formatter },
-    } = this
     this.subscription = createTimeAgoObservable(date, formatter).subscribe({
       next: value => {
         if (value === this.state.value) {
@@ -86,7 +107,9 @@ export class TimeAgo extends Component {
         }
         this.setState({ value })
       },
-      error: error => this.setState({ error, value: undefined }),
+      error: error => {
+        this.setState({ error: error.toString(), value: undefined })
+      },
     })
   }
 
@@ -97,10 +120,10 @@ export class TimeAgo extends Component {
     this.subscription.unsubscribe()
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: TimeAgoPropTypes) {
     if (this.props.date.getTime() !== nextProps.date.getTime()) {
       this.subscription.unsubscribe()
-      const { value } = this.props.formatter(
+      const { value } = (this.props.formatter || formatDate)(
         nextProps.date.getTime() / 1000,
         new Date().getTime() / 1000
       )
@@ -116,26 +139,13 @@ export class TimeAgo extends Component {
           }
           this.setState({ value })
         },
-        error: error => this.setState({ error, value: undefined }),
+        error: error =>
+          this.setState({ error: error.toString(), value: undefined }),
       })
     }
   }
 
   render() {
-    const {
-      state: { error, value },
-      props: { render, children },
-    } = this
-    return (children || render)({ error, value })
+    return (this.props.children || this.props.render)(this.state)
   }
-}
-
-TimeAgo.propTypes = {
-  date: PropTypes.instanceOf(Date).isRequired,
-  render: PropTypes.func,
-  formatter: PropTypes.func,
-}
-
-TimeAgo.defaultProps = {
-  formatter: formatDate,
 }
