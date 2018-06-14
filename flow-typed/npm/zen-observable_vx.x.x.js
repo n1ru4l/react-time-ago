@@ -1,14 +1,14 @@
-declare module 'zen-observable' {
+declare module "zen-observable" {
   declare type Observer<T> = {
     next: T => void,
     error: any => void,
-    complete: () => void,
-  }
+    complete: () => void
+  };
 
   declare type Subscription<T> = {
     unsubscribe: () => void,
-    closed: boolean,
-  }
+    closed: boolean
+  };
 
   declare class Observable<T> {
     constructor(subscriber: (Observer<T>) => () => void): Observable<T>;
@@ -16,8 +16,8 @@ declare module 'zen-observable' {
 
     subscribe({
       next: T => void,
-      error?: Error => void,
+      error?: Error => void
     }): Subscription<T>;
   }
-  declare module.exports: typeof Observable
+  declare module.exports: typeof Observable;
 }
