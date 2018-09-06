@@ -45,8 +45,8 @@
     "lolex": "2.7.4",
     "prettier": "1.14.2",
     "prettier-check": "2.0.0",
-    "react": "16.4.2",
-    "react-dom": "16.4.2",
+    "react": "16.5.0",
+    "react-dom": "16.5.0",
     "rollup": "0.65.2",
     "rollup-plugin-babel": "4.0.3",
     "semantic-release": "11.2.0"
