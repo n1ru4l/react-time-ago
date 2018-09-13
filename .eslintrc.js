@@ -1,20 +1,21 @@
 module.exports = {
-  plugins: [`jest`],
+  plugins: ["jest"],
+  parser: "babel-eslint",
   env: {
     browser: true,
     es6: true,
-    node: true,
+    node: true
   },
-  extends: [`eslint:recommended`, `plugin:jest/recommended`],
+  extends: ["eslint:recommended", "plugin:jest/recommended"],
   parserOptions: {
-    sourceType: `module`,
+    sourceType: "module"
   },
   overrides: [
     {
-      files: `src/*.test.js`,
+      files: "src/*.test.js",
       env: {
-        'jest/globals': true,
-      },
-    },
-  ],
-}
+        "jest/globals": true
+      }
+    }
+  ]
+};
