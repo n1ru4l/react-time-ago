@@ -2423,9 +2423,9 @@ escodegen@^1.9.0:
   optionalDependencies:
     source-map "~0.5.6"
 
-eslint-plugin-jest@21.27.0:
-  version "21.27.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-21.27.0.tgz#35ab98d41066efbac481b7a50b7c2877dfede70e"
+eslint-plugin-jest@21.27.1:
+  version "21.27.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-21.27.1.tgz#b64c2d6a7f0751cecc14580d7f4d9a5520424448"
 
 eslint-scope@^3.7.1:
   version "3.7.1"
