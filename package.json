@@ -28,8 +28,8 @@
     "LICENSE"
   ],
   "devDependencies": {
-    "@babel/core": "7.1.5",
-    "@babel/preset-env": "7.1.5",
+    "@babel/core": "7.1.6",
+    "@babel/preset-env": "7.1.6",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "23.6.0",
     "commitizen": "2.10.1",
