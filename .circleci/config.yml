@@ -6,7 +6,7 @@ version: 2
 jobs:
   build-job:
     docker:
-      - image: circleci/node:8.15.1@sha256:21d102cb4633f39bae6b9c0bb2a282d461dd0e40d65e86874dd70b65957ff210
+      - image: circleci/node:8.15.1@sha256:2528cc0d95da9efd5620d13cc56802e05a5453d12aac7a2a54b316f27867c381
 
     working_directory: ~/repo
     steps:
@@ -29,7 +29,7 @@ jobs:
 
   deploy-job:
     docker:
-      - image: circleci/node:8.15.1@sha256:21d102cb4633f39bae6b9c0bb2a282d461dd0e40d65e86874dd70b65957ff210
+      - image: circleci/node:8.15.1@sha256:2528cc0d95da9efd5620d13cc56802e05a5453d12aac7a2a54b316f27867c381
     working_directory: ~/repo
     steps:
       - checkout
