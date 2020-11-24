@@ -28,7 +28,7 @@
     "LICENSE"
   ],
   "devDependencies": {
-    "@babel/core": "7.12.8",
+    "@babel/core": "7.12.9",
     "@babel/preset-env": "7.12.7",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "23.6.0",
